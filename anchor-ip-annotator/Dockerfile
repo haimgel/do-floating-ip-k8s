@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM debian:11-slim
 
 LABEL org.opencontainers.image.source=https://github.com/haimgel/digital-ocean-floating-ip
 
