@@ -29,22 +29,24 @@ the pods with the anchor IP address, so the controller can find it later. Add th
 make sure pod's name and namespace are exposed as environment variables:
 
 ```yaml
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
   ....
   spec:
-    initContainers:
-    - name: do-anchor-ip-annotator
-      image: ghcr.io/haimgel/do-anchor-ip-annotator:0.1.0
-      env:
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
+    template:
+      spec:
+        initContainers:
+        - name: do-anchor-ip-annotator
+          image: ghcr.io/haimgel/do-anchor-ip-annotator:0.1.0
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
 ```
 
 ### Challenge: Firewall

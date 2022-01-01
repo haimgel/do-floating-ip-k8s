@@ -34,7 +34,9 @@ jobs:
 
       - name: Build
         working-directory: anchor-ip-annotator
-        run: cargo build --release
+        run: |
+          rustup target add x86_64-unknown-linux-musl
+          RUSTFLAGS='-C target-feature=-crt-static' cargo build --target x86_64-unknown-linux-musl --release
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
