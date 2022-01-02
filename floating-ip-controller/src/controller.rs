@@ -53,8 +53,8 @@ pub async fn run() -> Result<(), Error> {
     let pods: Api<Pod> = Api::namespaced(client.clone(), namespace.as_str());
 
     let lp = ListParams::default()
-        .labels("k8s.haim.dev/floating-ip") // filter instances by label
-        .timeout(30); // short watch timeout in this example
+        .labels("k8s.haim.dev/floating-ip")
+        .timeout(60);
 
     // See:
     // https://github.com/kube-rs/kube-rs/blob/master/examples/secret_syncer.rs

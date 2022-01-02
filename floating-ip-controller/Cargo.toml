@@ -12,11 +12,11 @@ anyhow = "^1.0.52"
 thiserror = "^1.0.30"
 # Use this branch (https://github.com/phaynes/digitalocean) till https://github.com/LoganDark/digitalocean/issues/1 is addressed properly
 # digitalocean = { version = "^0.1.1", path = "../../digitalocean" }
-digitalocean = { version = "^0.1.1", git = "https://github.com/phaynes/digitalocean", branch = "hotfix_branch" }
+digitalocean = { version = "^0.1.1", git = "https://github.com/phaynes/digitalocean", branch = "hotfix_branch", features = [] }
 futures = "^0.3.19"
-kube = { version = "^0.65.0", features = ["runtime","derive", "native-tls"] }
+kube = { version = "^0.65.0", features = ["runtime","derive", "rustls-tls"] }
 k8s-openapi = { version = "0.13.1", default-features = false, features = ["v1_20"] }
-reqwest = { version = "^0.11.8", features = ["native-tls"] }
+reqwest = { version = "^0.11.8", features = ["rustls-tls"] }
 tokio = { version = "1.15.0", features = ["macros", "rt-multi-thread" ] }
 tracing = "^0.1.29"
 tracing-subscriber = { version = "^0.3.5", features = ["env-filter", "json" ] }
