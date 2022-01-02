@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: anchor-ip-annotator-traefik
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: anchor-ip-annotator
+subjects:
+  - kind: ServiceAccount
+    name: traefik
+    namespace: kube-system

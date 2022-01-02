@@ -1,0 +1,19 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumLocalRedirectPolicy
+metadata:
+  name: "test1"
+  namespace: "kube-system"
+spec:
+  redirectFrontend:
+    addressMatcher:
+      ip: "10.20.0.8"
+      toPorts:
+        - port: "80"
+          protocol: TCP
+  redirectBackend:
+    localEndpointSelector:
+      matchLabels:
+        app.kubernetes.io/name: traefik
+    toPorts:
+      - port: "8000"
+        protocol: TCP
