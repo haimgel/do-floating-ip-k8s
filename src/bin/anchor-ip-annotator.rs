@@ -5,8 +5,8 @@ use do_floating_ip_k8s::logging;
 use tracing::error;
 
 async fn annotate_anchor_ip() -> Result<()> {
-    let anchor_ip = digital_ocean_metadata::anchor_ip().await?;
-    annotator::annotate(&anchor_ip).await?;
+    let node_info = digital_ocean_metadata::node_info().await?;
+    annotator::annotate_node(&node_info.hostname, &node_info.anchor_ip).await?;
     Ok(())
 }
 
