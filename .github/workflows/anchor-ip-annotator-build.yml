@@ -1,4 +1,4 @@
-name: Create and publish a Docker image for IP annotator
+name: Anchor IP Annotator Docker Build
 
 on:
   push:
