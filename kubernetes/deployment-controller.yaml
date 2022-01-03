@@ -32,6 +32,6 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: token
-                  name: digitalocean-token
+                  name: digital-ocean-token
       serviceAccount: do-floating-ip
       automountServiceAccountToken: true
