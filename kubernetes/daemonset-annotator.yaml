@@ -1,16 +1,22 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: floating-ip-annotator
+  name: anchor-ip-annotator
+  labels:
+    app.kubernetes.io/name: do-floating-ip
+    app.kubernetes.io/component: annotator
   namespace: default
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: floating-ip-annotator
+      app.kubernetes.io/name: do-floating-ip
+      app.kubernetes.io/component: annotator
   template:
     metadata:
+      name: anchor-ip-annotator
       labels:
-        app.kubernetes.io/name: floating-ip-annotator
+        app.kubernetes.io/name: do-floating-ip
+        app.kubernetes.io/component: annotator
     spec:
       affinity:
         nodeAffinity:
@@ -20,10 +26,11 @@ spec:
                 - key: k8s.haim.dev/digital-ocean-anchor-ip
                   operator: DoesNotExist
       containers:
-        - image: ghcr.io/haimgel/do-floating-ip:main
+        - name: anchor-ip-annotator
+          # TODO: Switch to using versions once stable
+          image: ghcr.io/haimgel/do-floating-ip:main
+          imagePullPolicy: Always
           command: ["/app/anchor-ip-annotator"]
           # command: ["/bin/sleep", "24h"]
-          imagePullPolicy: Always
-          name: floating-ip-annotator
           resources: {}
       serviceAccount: do-floating-ip

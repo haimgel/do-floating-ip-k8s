@@ -49,9 +49,8 @@ fn error_policy(error: &Error, _ctx: Context<ContextData>) -> ReconcilerAction {
 
 pub async fn run() -> Result<(), Error> {
     let client = kube::Client::try_default().await?;
-    let namespace = std::env::var("NAMESPACE").unwrap_or_else(|_| String::from("default"));
-    let pods: Api<Pod> = Api::namespaced(client.clone(), namespace.as_str());
-
+    // Note: monitoring ALL pods across all namespaces
+    let pods: Api<Pod> = Api::all(client.clone());
     let lp = ListParams::default().labels("k8s.haim.dev/floating-ip").timeout(60);
 
     // See:

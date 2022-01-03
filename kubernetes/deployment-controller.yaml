@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: floating-ip-controller
+  namespace: default
+  labels:
+    app.kubernetes.io/name: do-floating-ip
+    app.kubernetes.io/component: controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: do-floating-ip
+      app.kubernetes.io/component: controller
+  # TODO: deployment strategy
+  template:
+    metadata:
+      name: floating-ip-controller
+      labels:
+        app.kubernetes.io/name: do-floating-ip
+        app.kubernetes.io/component: controller
+    spec:
+      containers:
+        - name: floating-ip-controller
+          # TODO: Switch to using versions once stable
+          image: ghcr.io/haimgel/do-floating-ip:main
+          imagePullPolicy: Always
+          command: ["/app/floating-ip-controller"]
+          # command: ["/bin/sleep", "24h"]
+          env:
+            - name: DIGITALOCEAN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: token
+                  name: digitalocean-token
+      serviceAccount: do-floating-ip
+      automountServiceAccountToken: true
