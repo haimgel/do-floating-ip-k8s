@@ -16,7 +16,7 @@ pub async fn annotate_node(node_name: &str, anchor_ip: &str) -> Result<()> {
             "annotations": {
                 "k8s.haim.dev/digital-ocean-anchor-ip": anchor_ip
             },
-            "label": {
+            "labels": {
                 "k8s.haim.dev/digital-ocean-anchor-ip": "saved"
             },
         },

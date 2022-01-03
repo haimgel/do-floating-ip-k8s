@@ -18,8 +18,8 @@ spec:
         operator: Exists
       containers:
         - image: ghcr.io/haimgel/do-floating-ip:main
-          # command: ["/app/anchor-ip-annotator"]
-          command: ["/bin/sleep", "24h"]
+          command: ["/app/anchor-ip-annotator"]
+          # command: ["/bin/sleep", "24h"]
           imagePullPolicy: Always
           name: floating-ip-annotator
           resources: {}
