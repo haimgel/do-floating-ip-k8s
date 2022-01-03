@@ -14,9 +14,9 @@ COPY --chown=app . /src
 WORKDIR /src
 RUN --mount=type=cache,target=/usr/local/cargo/registry,uid=1000 \
     --mount=type=cache,target=/src/target,uid=1000 \
-    cargo build --release && \
-    cp /src/target/release/floating-ip-controller /app && \
-    cp /src/target/release/anchor-ip-annotator /app
+    cargo build && \
+    cp /src/target/debug/floating-ip-controller /app && \
+    cp /src/target/debug/anchor-ip-annotator /app
 
 FROM debian:bullseye-slim
 RUN \
