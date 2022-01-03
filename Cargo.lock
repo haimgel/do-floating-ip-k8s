@@ -356,6 +356,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "do-floating-ip-k8s"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "digitalocean",
+ "futures 0.3.19",
+ "k8s-openapi",
+ "kube",
+ "lazy_static",
+ "regex",
+ "reqwest 0.11.8",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "tokio 1.15.0",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "dtoa"
 version = "0.4.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -408,26 +428,6 @@ dependencies = [
  "crc32fast",
  "libc",
  "miniz_oxide",
-]
-
-[[package]]
-name = "floating-ip-controller"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "digitalocean",
- "futures 0.3.19",
- "k8s-openapi",
- "kube",
- "lazy_static",
- "regex",
- "reqwest 0.11.8",
- "serde",
- "serde_json",
- "thiserror",
- "tokio 1.15.0",
- "tracing",
- "tracing-subscriber",
 ]
 
 [[package]]

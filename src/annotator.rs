@@ -30,8 +30,7 @@ pub async fn annotate(anchor_ip: &str) -> Result<()> {
         "Applying annotation"
     );
     let patch_params = PatchParams::default();
-    pods.patch(&pod_name, &patch_params, &Patch::Strategic(&patch))
-        .await?;
+    pods.patch(&pod_name, &patch_params, &Patch::Strategic(&patch)).await?;
     info!(
         pod = pod_name.as_str(),
         namespace = pod_namespace.as_str(),

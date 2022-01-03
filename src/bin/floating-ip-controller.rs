@@ -1,9 +1,5 @@
-mod controller;
-mod errors;
-mod floating_ip;
-mod kubernetes_helpers;
-mod logging;
-
+use do_floating_ip_k8s::controller;
+use do_floating_ip_k8s::logging;
 use tracing::{error, info};
 
 #[tokio::main]
