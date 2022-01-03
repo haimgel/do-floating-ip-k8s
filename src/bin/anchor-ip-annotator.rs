@@ -7,6 +7,9 @@ use tracing::error;
 async fn annotate_anchor_ip() -> Result<()> {
     let node_info = digital_ocean_metadata::node_info().await?;
     annotator::annotate_node(&node_info.hostname, &node_info.anchor_ip).await?;
+    // Give it some time for the scheduler to get the new label, so it does not try to re-schedule
+    // this pod again on the same node.
+    tokio::time::sleep(std::time::Duration::from_secs(10)).await;
     Ok(())
 }
 
