@@ -1,10 +1,11 @@
-FROM rust:1.57.0-alpine3.14 as builder
+FROM rust:1.57.0-slim-bullseye as builder
 
 LABEL org.opencontainers.image.source=https://github.com/haimgel/digital-ocean-floating-ip
 
 # C compiler is needed for Ring, etc.
-RUN apk add build-base openssl-dev && \
-    adduser -u 1000 app -D && \
+RUN apt-get update && \
+    apt-get install -y build-essential libssl-dev pkg-config && \
+    adduser -u 1000 app --disabled-password && \
     mkdir -p /app /src && \
     chown app /src /app
 
@@ -17,9 +18,9 @@ RUN --mount=type=cache,target=/usr/local/cargo/registry,uid=1000 \
     cp /src/target/release/floating-ip-controller /app && \
     cp /src/target/release/anchor-ip-annotator /app
 
-FROM alpine:3.14
-RUN apk add openssl && \
-    adduser -u 1000 app -D && \
+FROM debian:bullseye-slim
+RUN \
+    adduser -u 1000 app --disabled-password && \
     mkdir /app
 
 COPY --from=builder /app/* /app
