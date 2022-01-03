@@ -14,8 +14,11 @@ WORKDIR /src
 RUN --mount=type=cache,target=/usr/local/cargo/registry,uid=1000 \
     --mount=type=cache,target=/src/target,uid=1000 \
     cargo build && \
+    cargo build --release && \
     cp /src/target/debug/floating-ip-controller /app && \
-    cp /src/target/debug/anchor-ip-annotator /app
+    cp /src/target/debug/anchor-ip-annotator /app && \
+    cp /src/target/release/floating-ip-controller /app/floating-ip-controller.release && \
+    cp /src/target/release/anchor-ip-annotator /app/anchor-ip-annotator.release
 
 FROM alpine:3.14
 RUN apk add openssl && \
