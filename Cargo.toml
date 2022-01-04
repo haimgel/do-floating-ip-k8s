@@ -3,7 +3,7 @@ name = "do-floating-ip-k8s"
 authors = ["Haim Gelfenbeyn <haim@g8n.me>"]
 description = "Floating IP controller for DigitalOcean K8S"
 readme = "README.md"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 license = "MIT"
 
